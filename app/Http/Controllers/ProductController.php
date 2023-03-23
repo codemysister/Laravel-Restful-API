@@ -12,6 +12,10 @@ use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {   
+        $this->middleware('auth:sanctum', ['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      *
