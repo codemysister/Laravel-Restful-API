@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 class ProductController extends Controller
 {
     public function __construct()
-    {   
+    {
         $this->middleware('auth:sanctum', ['index', 'show']);
     }
     /**
@@ -34,8 +34,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        
 
+        $this->authorize('if_moderator');
         $product = Product::create($request->toArray());
 
         return response()->json([
@@ -64,6 +64,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
+        $this->authorize('if_admin');
         $product->update($request->toArray());
 
         return response()->json([
